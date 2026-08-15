@@ -6,6 +6,18 @@
         "UpdateSourceArgs": "{{$FullRootDir}}dotnet"
     },
     {
+        "UpdateStageName": "Create 7-Zip Directory",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullRootDir}}7-Zip"
+    },
+    {
+        "UpdateStageName": "Create Server Directory",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullRootDir}}server"
+    },
+    {
         "UpdateStageName": ".NET Runtime 10.0",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
@@ -17,20 +29,14 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; Set-Location -Path '{{$FullRootDir}}'; if (-not (Test-Path 'dotnet')) { New-Item -ItemType Directory -Path 'dotnet' | Out-Null }; Invoke-WebRequest -UseBasicParsing -Uri 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1'; & .\\dotnet-install.ps1 -Version latest -InstallDir '{{$FullRootDir}}dotnet'; & .\\dotnet-install.ps1 -Runtime aspnetcore -Channel 10.0 -InstallDir '{{$FullRootDir}}dotnet'; Remove-Item -Force 'dotnet-install.ps1' -ErrorAction SilentlyContinue\""
-    },
-    {
-        "UpdateStageName": "7-Zip Directory Creation",
-        "UpdateSourcePlatform": "All",
-        "UpdateSource": "CreateDirectory",
-        "UpdateSourceArgs": "{{$FullRootDir}}7-Zip"
+        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; Set-Location -Path '{{$FullRootDir}}'; Invoke-WebRequest -UseBasicParsing -Uri 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1'; & .\\dotnet-install.ps1 -Version latest -InstallDir '{{$FullRootDir}}dotnet'; & .\\dotnet-install.ps1 -Runtime aspnetcore -Channel 10.0 -InstallDir '{{$FullRootDir}}dotnet'; Remove-Item -Force 'dotnet-install.ps1' -ErrorAction SilentlyContinue\""
     },
     {
         "UpdateStageName": "7-Zip Installation",
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Set-Location -Path '{{$FullRootDir}}7-Zip'; if (Test-Path '7z.exe') { exit 0 }; Invoke-WebRequest -UseBasicParsing -Uri 'https://github.com/ip7z/7zip/releases/download/26.00/7z2600-x64.exe' -OutFile '7z-installer.exe'; Invoke-WebRequest -UseBasicParsing -Uri 'https://github.com/ip7z/7zip/releases/download/26.00/7zr.exe' -OutFile '7zr.exe'; & .\\7zr.exe x -y -aoa .\\7z-installer.exe *> $null; Remove-Item -Force .\\7z-installer.exe -ErrorAction SilentlyContinue\""
+        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; Set-Location -Path '{{$FullRootDir}}7-Zip'; if (Test-Path '7z.exe') { exit 0 }; Invoke-WebRequest -UseBasicParsing -Uri 'https://github.com/ip7z/7zip/releases/download/26.00/7z2600-x64.exe' -OutFile '7z-installer.exe'; Invoke-WebRequest -UseBasicParsing -Uri 'https://github.com/ip7z/7zip/releases/download/26.00/7zr.exe' -OutFile '7zr.exe'; & .\\7zr.exe x -y -aoa .\\7z-installer.exe *> $null; Remove-Item -Force .\\7z-installer.exe -ErrorAction SilentlyContinue\""
     },
     {
         "UpdateStageName": "7-Zip Installation",
@@ -51,21 +57,21 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd \\\"{{$FullRootDir}}server\\\" && [[ -d SPT.bak ]] && rm -rf SPT.bak; [[ -d SPT ]] && cp -rf SPT SPT.bak || true\""
+        "UpdateSourceArgs": "-c \"cd \\\"{{$FullRootDir}}server\\\" && if [[ -d SPT.bak ]]; then rm -rf SPT.bak; fi; if [[ -d SPT ]]; then cp -rf SPT SPT.bak; fi\""
     },
     {
         "UpdateStageName": "SPT Installation",
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Set-Location -Path '{{$FullRootDir}}server'; $Release=Invoke-RestMethod -UseBasicParsing -Uri 'https://api.github.com/repos/sp-tarkov/build/releases/latest'; $DownloadURL=[regex]::Match($Release.body,'https://\\S+?\\.7z').Value; if ([string]::IsNullOrWhiteSpace($DownloadURL)) { Write-Error 'Could not find SPT 7z download URL'; exit 1 }; Invoke-WebRequest -UseBasicParsing -Uri $DownloadURL -OutFile 'SPT.7z'; & '..\\7-Zip\\7z.exe' x -y -aoa 'SPT.7z' | Out-Null; Remove-Item -Path 'SPT.7z' -Force -ErrorAction SilentlyContinue\""
+        "UpdateSourceArgs": "-NoProfile -Command \"$ProgressPreference='SilentlyContinue'; Set-Location -Path '{{$FullRootDir}}server'; $ReleasePage=(Invoke-WebRequest -UseBasicParsing -Uri 'https://github.com/sp-tarkov/build/releases/latest').Content; $DownloadURL=[regex]::Match($ReleasePage,'https://spt-releases\\.modd\\.in/[^\\\"'' ]+\\.7z').Value; if ([string]::IsNullOrWhiteSpace($DownloadURL)) { Write-Error 'Could not find SPT 7z download URL'; exit 1 }; Invoke-WebRequest -UseBasicParsing -Uri $DownloadURL -OutFile 'SPT.7z'; & '..\\7-Zip\\7z.exe' x -y -aoa 'SPT.7z' | Out-Null; Remove-Item -Path 'SPT.7z' -Force -ErrorAction SilentlyContinue\""
     },
     {
         "UpdateStageName": "SPT Installation",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd \\\"{{$FullRootDir}}server\\\" && DownloadURL=$(wget -qO- https://api.github.com/repos/sp-tarkov/build/releases/latest | jq -r '.body' | grep -Eo 'https://[^[:space:]]+\\.7z' | head -n1); if [[ -z \\\"$DownloadURL\\\" ]]; then echo 'Could not find SPT 7z download URL'; exit 1; fi; wget -qO SPT.7z \\\"$DownloadURL\\\" && ../7-Zip/7zzs x -y -aoa SPT.7z >/dev/null 2>&1 && rm -f SPT.7z && chmod +x SPT/SPT.Server.Linux\""
+        "UpdateSourceArgs": "-c \"cd \\\"{{$FullRootDir}}server\\\" && DownloadURL=$(wget -qO- https://github.com/sp-tarkov/build/releases/latest | grep -Eo 'https://spt-releases\\.modd\\.in/[^\\\"[:space:]]+\\.7z' | head -n1); if [[ -z \\\"$DownloadURL\\\" ]]; then echo 'Could not find SPT 7z download URL'; exit 1; fi; wget -qO SPT.7z \\\"$DownloadURL\\\" && ../7-Zip/7zzs x -y -aoa SPT.7z >/dev/null 2>&1 && rm -f SPT.7z && chmod +x SPT/SPT.Server.Linux\""
     },
     {
         "UpdateStageName": "Fika Server Mod Download",
