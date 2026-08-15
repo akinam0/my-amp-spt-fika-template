@@ -6,6 +6,13 @@
         "UpdateSourceArgs": "{{$FullRootDir}}dotnet"
     },
     {
+        "UpdateStageName": ".NET Runtime 10.0.9",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"cd \\\"{{$FullRootDir}}\\\" && if [[ -d dotnet/shared/Microsoft.WindowsDesktop.App/10.0.9 ]]; then echo \\\"Windows Desktop Runtime version 10.0.9 is already installed. Skipping.\\\" && exit 0; else rm -f dotnet.zip >/dev/null 2>&1; wget -qO dotnet.zip https://builds.dotnet.microsoft.com/dotnet/windowsdesktop/Runtime/10.0.9/windowsdesktop-runtime-10.0.9-win-x64.zip || { echo \\\"Download failed from the Microsoft Content Delivery Network. This is a fault with the Content Delivery Network, not the Application Management Panel. Aborting.\\\"; exit 1; }; mkdir -p dotnet && unzip -qo dotnet.zip -d dotnet >/dev/null 2>&1 && rm -f dotnet.zip >/dev/null 2>&1 && echo \\\"Windows Desktop Runtime version 10.0.9 downloaded and extracted successfully.\\\"; fi\""
+    },
+    {
         "UpdateStageName": "ASP.NET Core Runtime Download",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
