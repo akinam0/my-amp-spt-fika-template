@@ -6,11 +6,11 @@
         "UpdateSourceArgs": "{{$FullRootDir}}dotnet"
     },
     {
-        "UpdateStageName": ".NET Runtime 10.0.9",
+        "UpdateStageName": ".NET Runtime 10.0",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd \\\"{{$FullRootDir}}\\\" && if [[ -d dotnet/shared/Microsoft.WindowsDesktop.App/10.0.9 ]]; then echo \\\"Windows Desktop Runtime version 10.0.9 is already installed. Skipping.\\\" && exit 0; else rm -f dotnet.zip >/dev/null 2>&1; wget -qO dotnet.zip https://builds.dotnet.microsoft.com/dotnet/windowsdesktop/Runtime/10.0.9/windowsdesktop-runtime-10.0.9-win-x64.zip || { echo \\\"Download failed from the Microsoft Content Delivery Network. This is a fault with the Content Delivery Network, not the Application Management Panel. Aborting.\\\"; exit 1; }; mkdir -p dotnet && unzip -qo dotnet.zip -d dotnet >/dev/null 2>&1 && rm -f dotnet.zip >/dev/null 2>&1 && echo \\\"Windows Desktop Runtime version 10.0.9 downloaded and extracted successfully.\\\"; fi\""
+        "UpdateSourceArgs": "-c \"cd \\\"{{$FullRootDir}}\\\" && wget -q https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh || { echo \\\"Failed to download dotnet-install.sh. Aborting.\\\"; exit 1; }; chmod +x ./dotnet-install.sh && ./dotnet-install.sh --version latest && ./dotnet-install.sh --runtime aspnetcore --channel 10.0 && echo 'export DOTNET_ROOT=$HOME/.dotnet' >> ~/.bashrc && echo 'export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools' >> ~/.bashrc && export DOTNET_ROOT=$HOME/.dotnet && export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools && rm -f dotnet-install.sh && echo \\\".NET and ASP.NET Core runtimes installed successfully.\\\"\""
     },
     {
         "UpdateStageName": "ASP.NET Core Runtime Download",
