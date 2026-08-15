@@ -1,9 +1,10 @@
 {
-  "id": "b051768a-12ce-4b67-81fa-44333d9f7c5c",
-  "authors": ["akinam0"],
-  "origin": "https://github.com/akinam0/my-spt-fika-template.git",
-  "url": "https://github.com/akinam0/my-spt-fika-template",
-  "imagefile": "",
-  "prefix": "SPT",
-  "repotype": "AppTemplates"
+    "id": "6382bfa4-8693-4ab8-b602-62ffa89dbcfa",
+    "authors": [
+        "akinam0 - Made with AMP Config Generator"
+    ],
+    "origin": "https://github.com/akinam0/AMPTemplates.git",
+    "url": "https://github.com/akinam0/AMPTemplates",
+    "imagefile": "",
+    "prefix": "akinam0"
 }
