@@ -50,7 +50,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"cd /dotnetinstall && wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && chmod +x dotnet-install.sh\"",
+        "UpdateSourceArgs": "-c \"cd \\\"{{$FullRootDir}}\\\"/dotnetinstall && wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && chmod +x dotnet-install.sh\"",
         "SkipOnFailure": false
     },
     {
@@ -58,7 +58,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"/dotnetinstall/dotnet-install.sh --runtime dotnet --channel 10.0 --install-dir /dotnet --verbose\"",
+        "UpdateSourceArgs": "-c \"\\\"{{$FullRootDir}}\\\"/dotnetinstall/dotnet-install.sh --runtime dotnet --channel 10.0 --install-dir \\\"{{$FullRootDir}}\\\"/dotnet --verbose\"",
         "SkipOnFailure": false
     },
     {
@@ -66,7 +66,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"/dotnetinstall/dotnet-install.sh --runtime aspnetcore --channel 10.0 --install-dir /dotnet --verbose\"",
+        "UpdateSourceArgs": "-c \"\\\"{{$FullRootDir}}\\\"/dotnetinstall/dotnet-install.sh --runtime aspnetcore --channel 10.0 --install-dir \\\"{{$FullRootDir}}\\\"/dotnet --verbose\"",
         "SkipOnFailure": false
     },
     {
@@ -74,8 +74,8 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"export DOTNET_ROOT=/dotnet && export PATH=$PATH:/dotnet:/dotnet/tools && /dotnet/dotnet --list-runtimes\"",
-        "SkipOnFailure": false
+        "UpdateSourceArgs": "-c \"export DOTNET_ROOT=\\\"{{$FullRootDir}}\\\"/dotnet && export PATH=$PATH:\\\"{{$FullRootDir}}\\\"/dotnet:\\\"{{$FullRootDir}}\\\"/dotnet/tools && dotnet --list-runtimes\"",
+        "SkipOnFailure": true
     },
     {
         "UpdateStageName": "7-Zip Directory Creation",
