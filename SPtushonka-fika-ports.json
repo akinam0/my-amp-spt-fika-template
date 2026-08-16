@@ -8,6 +8,13 @@
     },
     {
         "Protocol": "UDP",
+        "Port": 25565,
+        "Name": "Fika Server Port",
+        "Description": "Port for Fika Server",
+        "Ref": "ServerPort"
+    }
+    {
+        "Protocol": "UDP",
         "Port": 6970,
         "Name": "NAT Punch Server Port",
         "Description": "Port for NAT Punch Server traffic",
