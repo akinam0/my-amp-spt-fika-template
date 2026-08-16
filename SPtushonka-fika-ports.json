@@ -12,7 +12,7 @@
         "Name": "Fika Server Port",
         "Description": "Port for Fika Server",
         "Ref": "ServerPort"
-    }
+    },
     {
         "Protocol": "UDP",
         "Port": 6970,
