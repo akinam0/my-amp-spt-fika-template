@@ -14,14 +14,6 @@
         "SkipOnFailure": true
     },
     {
-        "UpdateStageName": "tree",
-        "UpdateSourcePlatform": "Linux",
-        "UpdateSource": "Executable",
-        "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"tree\"",
-        "SkipOnFailure": true
-    },
-    {
         "UpdateStageName": "ls",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
@@ -35,6 +27,14 @@
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
         "UpdateSourceArgs": "-c \"echo $HOME\"",
+        "SkipOnFailure": true
+    },
+        {
+        "UpdateStageName": "echo $FullRootDir",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"echo \\\"{{$FullRootDir}}\\\"\"",
         "SkipOnFailure": true
     },
     {
