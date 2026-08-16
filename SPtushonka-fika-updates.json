@@ -4,7 +4,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c sleep 10",
+        "UpdateSourceArgs": "-c 'sleep 10'",
         "SkipOnFailure": false
     },
     {
