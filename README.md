@@ -11,8 +11,8 @@
 
 ### What is Done?
 
-> I managed to properly install .NET SDK & ASP.NET trough the dotnet-install.sh
+> I managed to properly install .NET SDK & ASP.NET through the dotnet-install.sh
 
 ### What has to be Done?
 
-> I cant comprehend the full scope yet, but the next step would be to install SPT (i would choose trough spt-additions), a problem that would occure would be you'd need to install tarkov through the BSG launcher (thats with the spt-additions script)
+> I cant comprehend the full scope yet, but the next step would be to install SPT (i would choose through spt-additions), a problem that would occure would be you'd need to install tarkov through the BSG launcher (thats with the spt-additions script)
