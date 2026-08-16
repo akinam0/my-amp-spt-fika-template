@@ -613,7 +613,7 @@
     "DisplayName": "Dotnet Version",
     "Category": "Updates",
     "Subcategory": "Server Updates:build:-1",
-    "Description": "Sets the ASP.NET Core Runtime/.NET Runtime 10.0 version (required by SPT 4.1.x) to install. Empty = latest 10.0.x. Update the server after changing this setting",
+    "Description": "Sets the ASP.NET Core Runtime/.NET Runtime 10.0 version (required by SPT 4.1.x) to install. Empty = auto-detect latest 10.0.x, falling back to a pinned known-good version if the version-check CDN request fails. Update the server after changing this setting",
     "Keywords": "dotnet,version",
     "FieldName": "DotnetVersion",
     "InputType": "text",
