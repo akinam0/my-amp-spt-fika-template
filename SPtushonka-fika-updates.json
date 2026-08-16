@@ -1,5 +1,13 @@
 [
     {
+        "UpdateStageName": "Sleep Test",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "sleep 10",
+        "SkipOnFailure": false
+    },
+    {
         "UpdateStageName": "Create Dotnet Directory",
         "UpdateSourcePlatform": "All",
         "UpdateSource": "CreateDirectory",
