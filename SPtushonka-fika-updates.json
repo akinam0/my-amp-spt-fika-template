@@ -6,11 +6,17 @@
         "UpdateSourceArgs": "{{$FullRootDir}}dotnet"
     },
     {
+        "UpdateStageName": "Create dotnetinstall Directory",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullRootDir}}dotnetinstall"
+    },
+    {
         "UpdateStageName": "get dotnet-install.sh",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"mkdir -p /dotnetinstall && cd /dotnetinstall && wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && chmod +x dotnet-install.sh\"",
+        "UpdateSourceArgs": "-c \"cd /dotnetinstall && wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && chmod +x dotnet-install.sh\"",
         "SkipOnFailure": false
     },
     {
