@@ -6,6 +6,12 @@
         "UpdateSourceArgs": "{{$FullRootDir}}dotnet"
     },
     {
+        "UpdateStageName": "Create Dotnet Directory",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullRootDir}}dotnetinstall"
+    },
+    {
         "UpdateStageName": "pwd",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
