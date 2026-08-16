@@ -29,12 +29,20 @@
         "UpdateSourceArgs": "-c \"echo $HOME\"",
         "SkipOnFailure": true
     },
-        {
+    {
         "UpdateStageName": "echo $FullRootDir",
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
         "UpdateSourceArgs": "-c \"echo \\\"{{$FullRootDir}}\\\"\"",
+        "SkipOnFailure": true
+    },
+        {
+        "UpdateStageName": "ls $FullRootDir",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"ls -a \\\"{{$FullRootDir}}\\\"\"",
         "SkipOnFailure": true
     },
     {
