@@ -6,10 +6,36 @@
         "UpdateSourceArgs": "{{$FullRootDir}}dotnet"
     },
     {
-        "UpdateStageName": "Create dotnetinstall Directory",
-        "UpdateSourcePlatform": "All",
-        "UpdateSource": "CreateDirectory",
-        "UpdateSourceArgs": "{{$FullRootDir}}dotnetinstall"
+        "UpdateStageName": "pwd",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"pwd\"",
+        "SkipOnFailure": true
+    },
+    {
+        "UpdateStageName": "tree",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"tree\"",
+        "SkipOnFailure": true
+    },
+    {
+        "UpdateStageName": "ls",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"ls\"",
+        "SkipOnFailure": true
+    },
+    {
+        "UpdateStageName": "echo $HOME",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"echo $HOME\"",
+        "SkipOnFailure": true
     },
     {
         "UpdateStageName": "get dotnet-install.sh",
